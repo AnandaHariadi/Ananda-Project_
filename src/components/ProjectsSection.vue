@@ -190,7 +190,7 @@ const projects = [
   },
   {
     title: 'Tameng Muda',
-    event: 'Center of Excellence',
+    event: 'Prototype',
     description: 'Innovative drone design for climate change detection and pollution reduction in Sidoarjo, using computer vision for real-time environmental analysis.',
     tags: ['Robotics', 'ROS', 'Computer Vision'],
     gradient: 'from-teal-600 to-blue-500',
