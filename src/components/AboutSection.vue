@@ -217,7 +217,7 @@ const description =
 
 /* quick-fact info blocks (minimalist icons) */
 const info = [
-  { label: 'Location', value: 'Surabaya, Indonesia', icon: 'M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11zM12 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z' },
+  { label: 'Location', value: 'Sidoarjo, Indonesia', icon: 'M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11zM12 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z' },
   { label: 'Education', value: 'S1 Informatics, UPNVJT', icon: 'M22 10L12 5 2 10l10 5 10-5zM6 12v5c0 1.1 2.7 2.5 6 2.5s6-1.4 6-2.5v-5' },
   { label: 'Interests', value: 'Web, AI, Robotics', icon: 'M12 3l1.9 4.8L19 9.7l-4.1 1.9L12 16l-1.9-4.4L6 9.7l5.1-1.9L12 3z' },
   { label: 'Goal', value: 'Human-centered systems', icon: 'M12 22a10 10 0 100-20 10 10 0 000 20zM12 16a4 4 0 100-8 4 4 0 000 8zM12 13a1 1 0 100-2 1 1 0 000 2z' },
