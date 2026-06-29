@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import AppLoader from './components/AppLoader.vue';
-import CustomCursor from './components/CustomCursor.vue';
 import ScrollProgress from './components/ScrollProgress.vue';
 import Navbar from './components/Navbar.vue';
 import HeroSection from './components/HeroSection.vue';
@@ -35,7 +34,6 @@ onUnmounted(() => window.removeEventListener('popstate', onPopState));
 
 <template>
   <AppLoader @done="loaded = true" />
-  <CustomCursor />
   <ScrollProgress />
 
   <div class="relative min-h-screen text-white bg-[#030014] overflow-hidden" :class="loaded ? 'content-ready' : 'content-hold'">

@@ -48,7 +48,7 @@
                 :src="project.image"
                 :alt="project.title"
                 loading="lazy"
-                class="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700 ease-out"
+                :class="['absolute inset-0 w-full h-full transition-transform duration-700 ease-out', project.imageClass || 'object-cover scale-105 group-hover:scale-110']"
               />
               <!-- darkening overlay -->
               <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c] via-[#0a051c]/30 to-transparent"></div>
@@ -123,63 +123,70 @@ const projects = [
     event: 'Web App',
     description: 'A comprehensive, modern portal designed for efficient distribution and data collection of questionnaires, tailored specifically for structured surveys and user responses.',
     tags: ['Vue.js', 'Web App', 'Survey System'],
-    gradient: 'from-fuchsia-600 to-pink-500',
+    gradient: 'from-blue-600 to-indigo-500',
     link: 'https://portal-kuisioner-juned.vercel.app/',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/portal-kuisioner.png',
+    imageClass: 'object-cover object-bottom scale-[1.1] group-hover:scale-[1.15] origin-bottom'
   },
   {
     title: 'Juned System',
-    event: 'Platform',
+    event: 'Web App',
     description: 'A dedicated scalable system platform built to handle complex integrations and robust data serving. Focuses on high availability and responsive UI.',
     tags: ['Architecture', 'Platform', 'Fullstack'],
     gradient: 'from-blue-600 to-indigo-500',
     link: 'https://juned.nxx.my.id/',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/juned-system.png',
+    imageClass: 'object-cover object-bottom scale-[1.1] group-hover:scale-[1.15] origin-bottom'
   },
   {
     title: 'NDA Property',
-    event: 'Real Estate',
+    event: 'Web App',
     description: 'An elegant real estate web application built for seamless property browsing, featuring an intuitive modern interface and high-performance image rendering.',
     tags: ['Real Estate', 'UI/UX', 'Frontend'],
-    gradient: 'from-teal-500 to-emerald-400',
+    gradient: 'from-blue-600 to-indigo-500',
     link: 'https://ndaproperty26.vercel.app/',
-    image: 'https://images.unsplash.com/photo-1512917774080-9bc0b252726f?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/nda-property.png',
+    imageClass: 'object-cover object-bottom scale-[1.1] group-hover:scale-[1.15] origin-bottom'
   },
   {
     title: 'Koen Chips',
-    event: 'E-Commerce',
+    event: 'Web App',
     description: 'A lively, high-performance e-commerce landing page crafted for the Koen Chips brand, emphasizing brand identity, fast loading times, and engaging animations.',
     tags: ['E-Commerce', 'Branding', 'Animation'],
-    gradient: 'from-orange-500 to-yellow-400',
+    gradient: 'from-blue-600 to-indigo-500',
     link: 'https://koenchips-id.vercel.app/',
-    image: 'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/koen-chips.png',
+    imageClass: 'object-cover object-bottom scale-[1.1] group-hover:scale-[1.15] origin-bottom'
   },
   {
     title: 'AquaMesh',
-    event: 'Young Ideas',
+    event: 'Prototype Machine',
     description: 'An IoT and AI-based system for monitoring and managing water quality, using cloud infrastructure for real-time analysis and predictive maintenance.',
     tags: ['IoT', 'Data Analytics', 'Cloud', 'Python'],
     gradient: 'from-cyan-600 to-blue-500',
     link: 'https://github.com/AnandaHariadi',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/aquamesh-1.jpeg',
+    imageClass: 'object-cover group-hover:scale-105'
   },
   {
     title: 'ELVANOR',
-    event: 'PMW 2025',
+    event: 'Parfume Product',
     description: 'Leading UI/UX design and business analysis for a standardized natural ingredient product platform, driving institutional and commercial scalability.',
     tags: ['UI/UX', 'Business Analysis', 'React'],
     gradient: 'from-purple-600 to-fuchsia-500',
     link: 'https://github.com/AnandaHariadi',
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/elvanor-featured.jpeg',
+    imageClass: 'object-cover scale-[1.15] group-hover:scale-[1.25]'
   },
   {
-    title: 'BubbleGum',
-    event: 'Global Game Jam',
-    description: 'An interactive social educational game that combines casual and competitive gameplay with dynamic event triggers and real-time multiplayer.',
-    tags: ['Game Development', 'C++', 'Architecture'],
-    gradient: 'from-indigo-600 to-purple-600',
-    link: 'https://github.com/AnandaHariadi',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800'
+    title: 'Jagaya Monitoring',
+    event: 'Web App',
+    description: 'A web application built for monitoring flood disasters in Demak, providing real-time data and early warnings.',
+    tags: ['Web App', 'Monitoring', 'Disaster Management'],
+    gradient: 'from-blue-600 to-indigo-500',
+    link: 'https://jagaya.vercel.app/',
+    image: '/assets/jagaya.png',
+    imageClass: 'object-cover object-bottom scale-[1.1] group-hover:scale-[1.15] origin-bottom'
   },
   {
     title: 'Tameng Muda',
@@ -188,7 +195,17 @@ const projects = [
     tags: ['Robotics', 'ROS', 'Computer Vision'],
     gradient: 'from-teal-600 to-blue-500',
     link: 'https://github.com/AnandaHariadi',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800'
+    image: '/assets/tameng-muda.png'
+  },
+  {
+    title: 'Pacilkom AI',
+    event: 'Web App',
+    description: 'An AI module navigation dashboard featuring Crop Prediction (MLP / RF), Apple Quality (CNN Vision), Consumer Perception (NLP), Macro Integration (GNN), and Selling Price Calculation.',
+    tags: ['AI', 'Dashboard', 'Machine Learning'],
+    gradient: 'from-blue-600 to-indigo-500',
+    link: 'https://pacilkom-ai-poncokusumo.streamlit.app/',
+    image: '/assets/pacilkom-ai.png',
+    imageClass: 'object-cover object-bottom scale-[1.1] group-hover:scale-[1.15] origin-bottom'
   }
 ];
 </script>

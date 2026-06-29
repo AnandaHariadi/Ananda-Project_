@@ -11,7 +11,7 @@
           <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.2)_1px,_transparent_1px)] [background-size:20px_20px] opacity-30"></div>
           
           <!-- Image if available -->
-          <img v-if="ui.activeDetailItem.image" :src="ui.activeDetailItem.image" :alt="ui.activeDetailItem.title || ui.activeDetailItem.org" class="absolute inset-0 w-full h-full object-cover" />
+          <img v-if="ui.activeDetailItem.image" :src="ui.activeDetailItem.image" :alt="ui.activeDetailItem.title || ui.activeDetailItem.org" :class="['absolute inset-0 w-full h-full', ui.activeDetailItem.imageClass || 'object-cover']" />
           <!-- legibility fade so the close button + rounded header read cleanly -->
           <div v-if="ui.activeDetailItem.image" class="absolute inset-0 bg-gradient-to-t from-[#0a051c] via-transparent to-black/20"></div>
           

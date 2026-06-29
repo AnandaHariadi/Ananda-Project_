@@ -74,7 +74,7 @@
             </div>
             
             <div class="relative z-10 flex items-end gap-3 mt-1">
-              <span class="text-3xl font-bold text-white tracking-wide drop-shadow-md">Sidoarjo</span>
+              <span class="text-2xl font-bold text-white tracking-wide drop-shadow-md">Sidoarjo</span>
               <span class="text-emerald-400 font-medium mb-1 text-sm">Indonesia</span>
             </div>
             

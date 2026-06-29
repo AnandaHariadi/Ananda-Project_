@@ -126,13 +126,13 @@
 
             <!-- Photos Side (2 photos) -->
             <div :class="[i % 2 !== 0 ? 'lg:order-1' : 'lg:order-2', 'grid grid-cols-2 gap-4 h-[280px] sm:h-[400px]']">
-              <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl translate-y-4 md:translate-y-8 group relative">
-                <img :src="getPhoto(w, i, 0)" :class="['w-full h-full object-cover transition-transform duration-700 ease-out', getPhoto(w, i, 0).includes('ggj-1') ? 'scale-[1.3] group-hover:scale-[1.45]' : 'group-hover:scale-110']" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent"></div>
+              <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl translate-y-4 md:translate-y-8 group relative bg-black/40 flex items-center justify-center">
+                <img :src="getPhoto(w, i, 0)" :class="['w-full h-full transition-transform duration-700 ease-out', getPhoto(w, i, 0).includes('elvanor') ? 'object-contain scale-[1.25] group-hover:scale-[1.35]' : 'object-cover ' + (getPhoto(w, i, 0).includes('ggj-1') ? 'scale-[1.3] group-hover:scale-[1.45]' : 'group-hover:scale-110')]" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent pointer-events-none"></div>
               </div>
-              <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl -translate-y-4 md:-translate-y-8 group relative">
-                <img :src="getPhoto(w, i, 1)" :class="['w-full h-full object-cover transition-transform duration-700 ease-out', getPhoto(w, i, 1).includes('humas-upn-2') ? 'scale-[1.3] group-hover:scale-[1.45]' : (getPhoto(w, i, 1).includes('ggj-1') ? 'scale-[1.3] group-hover:scale-[1.45]' : 'group-hover:scale-110')]" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent"></div>
+              <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl -translate-y-4 md:-translate-y-8 group relative bg-black/40 flex items-center justify-center">
+                <img :src="getPhoto(w, i, 1)" :class="['w-full h-full transition-transform duration-700 ease-out', getPhoto(w, i, 1).includes('elvanor') ? 'object-contain scale-[1.25] group-hover:scale-[1.35]' : 'object-cover ' + (getPhoto(w, i, 1).includes('humas-upn-2') ? 'scale-[1.3] group-hover:scale-[1.45]' : (getPhoto(w, i, 1).includes('ggj-1') ? 'scale-[1.3] group-hover:scale-[1.45]' : 'group-hover:scale-110'))]" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent pointer-events-none"></div>
               </div>
             </div>
           </div>
@@ -176,22 +176,25 @@
             <div :class="[
               i % 2 === 0 ? 'lg:order-1' : 'lg:order-2',
               'h-[280px] sm:h-[400px] flex justify-center',
-              (!o.photos || o.photos.length !== 1) ? 'grid grid-cols-2 gap-4' : ''
+              (getPhotoCount(o, i) !== 1) ? 'grid grid-cols-2 gap-4' : ''
             ]">
-              <!-- If only 1 photo -->
-              <div v-if="o.photos && o.photos.length === 1" class="w-full max-w-[340px] h-full rounded-3xl overflow-hidden border border-white/10 shadow-xl group relative">
-                <img :src="o.photos[0]" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" :style="o.photos[0].includes('robotic-1') ? 'object-position: left center;' : 'object-position: center;'" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent"></div>
-              </div>
+              <!-- If only 1 photo exists -->
+              <template v-if="getPhotoCount(o, i) === 1">
+                <div :class="['rounded-3xl overflow-hidden border border-white/10 shadow-xl group relative bg-black/40 flex items-center justify-center', 
+                  (getPhoto(o, i, 0).includes('duta-smanstar') || getPhoto(o, i, 0).includes('osis')) ? 'col-span-2 aspect-[21/9]' : 'aspect-square md:aspect-auto h-full']">
+                  <img :src="getPhoto(o, i, 0)" :class="['w-full h-full transition-transform duration-700 ease-out', getPhoto(o, i, 0).includes('duta-smanstar') ? 'object-cover object-[center_40%] scale-105 group-hover:scale-110' : getPhoto(o, i, 0).includes('osis') || getPhoto(o, i, 0).includes('robotic') ? 'object-cover object-[center_30%] scale-105 group-hover:scale-110' : 'object-cover object-center group-hover:scale-110']" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+              </template>
               <!-- If 2 or fallback photos -->
               <template v-else>
-                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl translate-y-4 md:translate-y-8 group relative">
-                  <img :src="getPhoto(o, i, 0)" :class="['w-full h-full object-cover object-center transition-transform duration-700 ease-out', getPhoto(o, i, 0).includes('ikatandans-1') ? 'scale-[1.2] group-hover:scale-[1.35]' : (getPhoto(o, i, 0).includes('robotic') ? 'scale-100 group-hover:scale-105' : 'group-hover:scale-110')]" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent"></div>
+                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl translate-y-4 md:translate-y-8 group relative bg-black/40 flex items-center justify-center">
+                  <img :src="getPhoto(o, i, 0)" :class="['w-full h-full transition-transform duration-700 ease-out', getPhoto(o, i, 0).includes('robotic') ? 'object-cover scale-[1.25] group-hover:scale-[1.35] object-left' : 'object-cover object-center ' + (getPhoto(o, i, 0).includes('ikatandans-1') ? 'scale-[1.2] group-hover:scale-[1.35]' : 'group-hover:scale-110')]" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent pointer-events-none"></div>
                 </div>
-                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl -translate-y-4 md:-translate-y-8 group relative">
-                  <img :src="getPhoto(o, i, 1)" :class="['w-full h-full object-cover object-center transition-transform duration-700 ease-out', getPhoto(o, i, 1).includes('ikatandans-2') ? 'scale-[1.1] group-hover:scale-[1.2]' : (getPhoto(o, i, 1).includes('robotic') ? 'scale-100 group-hover:scale-105' : 'group-hover:scale-110')]" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent"></div>
+                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-xl -translate-y-4 md:-translate-y-8 group relative bg-black/40 flex items-center justify-center">
+                  <img :src="getPhoto(o, i, 1)" :class="['w-full h-full transition-transform duration-700 ease-out', getPhoto(o, i, 1).includes('robotic') ? 'object-cover scale-[1.25] group-hover:scale-[1.35] object-[30%_center]' : 'object-cover object-center ' + (getPhoto(o, i, 1).includes('ikatandans-2') ? 'scale-[1.1] group-hover:scale-[1.2]' : 'group-hover:scale-110')]" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c]/60 via-transparent to-transparent pointer-events-none"></div>
                 </div>
               </template>
             </div>
@@ -252,6 +255,10 @@ function getPhoto(item, index, offsetIndex) {
   if (item.photos && item.photos[offsetIndex]) return item.photos[offsetIndex];
   const hash = (item.org || '').length + (item.role || '').length;
   return fallbackPhotos[(hash + index + offsetIndex) % fallbackPhotos.length];
+}
+
+function getPhotoCount(item, index) {
+  return item.photos ? item.photos.length : 2;
 }
 
 /* split "Role — Location" into separate pieces */
