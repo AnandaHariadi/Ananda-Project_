@@ -11,7 +11,9 @@
           <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.2)_1px,_transparent_1px)] [background-size:20px_20px] opacity-30"></div>
           
           <!-- Image if available -->
-          <img v-if="ui.activeDetailItem.image" :src="ui.activeDetailItem.image" :alt="ui.activeDetailItem.title || ui.activeDetailItem.org" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay" />
+          <img v-if="ui.activeDetailItem.image" :src="ui.activeDetailItem.image" :alt="ui.activeDetailItem.title || ui.activeDetailItem.org" class="absolute inset-0 w-full h-full object-cover" />
+          <!-- legibility fade so the close button + rounded header read cleanly -->
+          <div v-if="ui.activeDetailItem.image" class="absolute inset-0 bg-gradient-to-t from-[#0a051c] via-transparent to-black/20"></div>
           
           <button @click="close" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white hover:bg-black/60 transition-colors border border-white/10">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>

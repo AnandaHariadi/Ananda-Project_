@@ -1,12 +1,62 @@
 <template>
   <section class="py-24 relative overflow-hidden">
-    <!-- edge fades -->
-    <div class="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-[#030014] to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-[#030014] to-transparent z-10 pointer-events-none"></div>
+    <!-- Left Side: Geometric Hologram (Cyan/Blue) -->
+    <div class="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 w-48 h-48 justify-center items-center z-0 opacity-50 pointer-events-none">
+      <div class="cube-wrapper">
+        <div class="cube cube-left">
+          <div class="face front"></div>
+          <div class="face back"></div>
+          <div class="face right"></div>
+          <div class="face left"></div>
+          <div class="face top"></div>
+          <div class="face bottom"></div>
+        </div>
+        <!-- Inner Cube -->
+        <div class="cube cube-left-inner">
+          <div class="face front-inner"></div>
+          <div class="face back-inner"></div>
+          <div class="face right-inner"></div>
+          <div class="face left-inner"></div>
+          <div class="face top-inner"></div>
+          <div class="face bottom-inner"></div>
+        </div>
+      </div>
+    </div>
 
-    <p class="text-center text-xs font-bold uppercase tracking-[0.3em] text-purple-400 mb-16 relative z-20">
-      Tools &amp; Technologies
-    </p>
+    <!-- Right Side: Geometric Hologram (Purple/Fuchsia) -->
+    <div class="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 w-48 h-48 justify-center items-center z-0 opacity-50 pointer-events-none">
+      <div class="cube-wrapper">
+        <div class="cube cube-right">
+          <div class="face front-purple"></div>
+          <div class="face back-purple"></div>
+          <div class="face right-purple"></div>
+          <div class="face left-purple"></div>
+          <div class="face top-purple"></div>
+          <div class="face bottom-purple"></div>
+        </div>
+        <!-- Inner Cube -->
+        <div class="cube cube-right-inner">
+          <div class="face front-inner-purple"></div>
+          <div class="face back-inner-purple"></div>
+          <div class="face right-inner-purple"></div>
+          <div class="face left-inner-purple"></div>
+          <div class="face top-inner-purple"></div>
+          <div class="face bottom-inner-purple"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="flex flex-col items-center justify-center text-center mb-16 relative z-20" v-reveal>
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-8 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+        <h2 class="text-blue-400 font-semibold tracking-[0.2em] uppercase text-sm">Skills</h2>
+        <div class="w-8 h-1 bg-gradient-to-l from-blue-500 to-purple-500 rounded-full"></div>
+      </div>
+      <h3 class="text-5xl md:text-6xl font-outfit font-black text-white tracking-tight drop-shadow-lg">
+        Tools &amp; <span class="gradient-text">Technologies.</span>
+      </h3>
+    </div>
 
     <!-- Floating Galaxy Container -->
     <div class="relative w-full max-w-5xl mx-auto h-[400px] flex items-center justify-center">
@@ -81,5 +131,99 @@ const tools = [
   100% {
     transform: translate(0px, 0px) rotate(0deg);
   }
+}
+
+/* Hologram Cube CSS */
+.cube-wrapper {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cube {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.cube-left {
+  width: 140px;
+  height: 140px;
+  animation: rotate-cube 12s infinite linear;
+}
+.cube-left-inner {
+  width: 70px;
+  height: 70px;
+  animation: rotate-cube-reverse 8s infinite linear;
+}
+
+.cube-right {
+  width: 140px;
+  height: 140px;
+  animation: rotate-cube-reverse 15s infinite linear;
+}
+.cube-right-inner {
+  width: 70px;
+  height: 70px;
+  animation: rotate-cube 10s infinite linear;
+}
+
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-width: 1.5px;
+  border-style: solid;
+  backdrop-filter: blur(2px);
+}
+
+/* Left Cube (Cyan/Blue) */
+.cube-left .face {
+  border-color: rgba(56, 189, 248, 0.4); /* sky-400 */
+  background: rgba(56, 189, 248, 0.02);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2) inset;
+}
+.cube-left-inner .face {
+  border-color: rgba(96, 165, 250, 0.6); /* blue-400 */
+  background: rgba(96, 165, 250, 0.05);
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.3) inset;
+}
+
+/* Right Cube (Purple/Fuchsia) */
+.cube-right .face {
+  border-color: rgba(192, 132, 252, 0.4); /* purple-400 */
+  background: rgba(192, 132, 252, 0.02);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.2) inset;
+}
+.cube-right-inner .face {
+  border-color: rgba(232, 121, 249, 0.6); /* fuchsia-400 */
+  background: rgba(232, 121, 249, 0.05);
+  box-shadow: 0 0 10px rgba(232, 121, 249, 0.3) inset;
+}
+
+/* Transforms for Outer Cubes (140px) */
+.cube-left .front, .cube-right .front-purple { transform: translateZ(70px); }
+.cube-left .back, .cube-right .back-purple { transform: rotateY(180deg) translateZ(70px); }
+.cube-left .right, .cube-right .right-purple { transform: rotateY(90deg) translateZ(70px); }
+.cube-left .left, .cube-right .left-purple { transform: rotateY(-90deg) translateZ(70px); }
+.cube-left .top, .cube-right .top-purple { transform: rotateX(90deg) translateZ(70px); }
+.cube-left .bottom, .cube-right .bottom-purple { transform: rotateX(-90deg) translateZ(70px); }
+
+/* Transforms for Inner Cubes (70px) */
+.cube-left-inner .front-inner, .cube-right-inner .front-inner-purple { transform: translateZ(35px); }
+.cube-left-inner .back-inner, .cube-right-inner .back-inner-purple { transform: rotateY(180deg) translateZ(35px); }
+.cube-left-inner .right-inner, .cube-right-inner .right-inner-purple { transform: rotateY(90deg) translateZ(35px); }
+.cube-left-inner .left-inner, .cube-right-inner .left-inner-purple { transform: rotateY(-90deg) translateZ(35px); }
+.cube-left-inner .top-inner, .cube-right-inner .top-inner-purple { transform: rotateX(90deg) translateZ(35px); }
+.cube-left-inner .bottom-inner, .cube-right-inner .bottom-inner-purple { transform: rotateX(-90deg) translateZ(35px); }
+
+@keyframes rotate-cube {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes rotate-cube-reverse {
+  0% { transform: rotateX(360deg) rotateY(360deg) rotateZ(0deg); }
+  100% { transform: rotateX(0deg) rotateY(0deg) rotateZ(360deg); }
 }
 </style>

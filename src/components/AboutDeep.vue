@@ -7,7 +7,7 @@
     <!-- sticky top bar -->
     <div class="absolute top-0 w-full z-20 px-6 py-6 flex items-center justify-between pointer-events-none">
       <span class="font-outfit font-bold text-xl tracking-tight text-white pointer-events-auto">
-        <span class="text-white">Ananda</span><span class="text-purple-500">.</span>
+        <span class="font-signature font-bold text-white text-3xl">Ananda</span><span class="font-signature font-bold text-purple-500 text-3xl">.</span>
         <span class="text-gray-500 font-medium text-sm ml-2 hidden sm:inline">/ The Story</span>
       </span>
       <button
@@ -60,7 +60,7 @@
             
             <div class="space-y-6">
               <button
-                v-for="(exp, i) in experiences"
+                v-for="(exp, i) in workExperiences"
                 :key="i"
                 @click="openDetail(exp)"
                 class="w-full text-left group p-6 rounded-3xl border border-white/5 bg-white/5 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300"
@@ -138,9 +138,12 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, nextTick } from 'vue';
+import { onMounted, onUnmounted, nextTick, computed } from 'vue';
 import { aboutIntro, experiences, education, skillCategories } from '../data.js';
 import { closeAbout, openDetail } from '../store.js';
+
+// The Education chapter has its own column, so keep Experience to Work + Organization.
+const workExperiences = computed(() => experiences.filter((e) => e.tag !== 'Education'));
 
 function close() {
   closeAbout();

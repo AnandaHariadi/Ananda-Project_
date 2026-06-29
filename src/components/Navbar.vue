@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center">
         <!-- Logo -->
-        <a href="#home" class="font-outfit font-bold text-2xl tracking-tighter group">
+        <a href="#home" class="font-signature font-bold text-3xl tracking-normal group">
           <span class="text-white">Ananda</span><span class="text-purple-500 group-hover:text-blue-400 transition-colors">.</span>
         </a>
 
@@ -102,6 +102,7 @@ const active = ref('home');
 const navItems = [
   { name: 'Home', href: '#home', id: 'home' },
   { name: 'About', href: '#about', id: 'about' },
+  { name: 'Skills', href: '#skills', id: 'skills' },
   { name: 'Projects', href: '#projects', id: 'projects' },
   { name: 'Contact', href: '#contact', id: 'contact' },
 ];
@@ -124,7 +125,7 @@ onMounted(() => {
     },
     { rootMargin: '-45% 0px -50% 0px' }
   );
-  ['home', 'about', 'projects', 'contact'].forEach((id) => {
+  ['home', 'about', 'skills', 'projects', 'contact'].forEach((id) => {
     const el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });

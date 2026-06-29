@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --font-inter: "Inter", sans-serif;
-  --font-outfit: "Outfit", sans-serif;
+  --font-inter: "Geist", sans-serif;
+  --font-outfit: "Geist", sans-serif;
+  --font-display: "Geist", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-signature: "Dancing Script", cursive;
 
   --color-primary-50: #f5f3ff;
   --color-primary-100: #ede9fe;
@@ -43,7 +46,7 @@ body.has-custom-cursor button {
 @layer utilities {
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(110deg, #6d28d9, #4f46e5 45%, #1d4ed8 75%, #6d28d9);
+    background-image: linear-gradient(110deg, #a78bfa, #818cf8 45%, #60a5fa 75%, #c4b5fd);
     background-size: 220% auto;
     animation: gradient-x 6s ease infinite;
   }
@@ -80,20 +83,30 @@ body.has-custom-cursor button {
 /* ===================== SCROLL REVEAL (directive) ================== */
 .reveal {
   opacity: 0;
-  transform: translateY(36px);
+  transform: translateY(56px);
   transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 .reveal-left {
-  transform: translateX(-48px);
+  transform: translate(-80px, 20px);
 }
 .reveal-right {
-  transform: translateX(48px);
+  transform: translate(80px, 20px);
 }
 .reveal-zoom {
-  transform: scale(0.92);
+  transform: scale(0.82);
+}
+.reveal-up {
+  transform: translateY(96px);
+}
+.reveal-rotate {
+  transform: translateY(64px) rotate(-5deg) scale(0.94);
+}
+.reveal-flip {
+  transform: perspective(1400px) rotateX(20deg) translateY(70px);
+  transform-origin: top center;
 }
 .reveal-in {
   opacity: 1;

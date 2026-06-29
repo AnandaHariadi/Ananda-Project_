@@ -2,29 +2,30 @@
   <Transition name="loader">
     <div
       v-if="visible"
-      class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white"
+      class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#030014]"
     >
-      <!-- soft gradient glow -->
-      <div class="absolute w-[420px] h-[420px] bg-gradient-to-tr from-purple-200/50 to-blue-200/40 rounded-full blur-[100px]"></div>
-
-      <div class="relative flex flex-col items-center gap-8">
-        <!-- spinning gradient ring -->
-        <div class="relative w-20 h-20">
-          <div class="absolute inset-0 rounded-full border-2 border-purple-100"></div>
-          <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-purple-600 border-r-blue-600 animate-spin-slow" style="animation-duration:1.1s"></div>
-          <div class="absolute inset-0 flex items-center justify-center font-outfit font-black text-2xl gradient-text">A</div>
+      <div class="relative flex flex-col items-center">
+        <!-- Minimal Logo / Text -->
+        <div class="flex flex-col items-center mb-6">
+          <span class="font-signature text-5xl md:text-6xl text-white mb-2 tracking-wide drop-shadow-md">
+            Ananda
+          </span>
+          <span class="font-outfit text-[10px] font-bold uppercase tracking-[0.4em] text-blue-400 ml-1">
+            Portofolio
+          </span>
         </div>
-
-        <p class="font-outfit font-bold text-lg tracking-[0.3em] uppercase shimmer-text">
-          Loading
-        </p>
-
-        <!-- progress bar -->
-        <div class="w-48 h-1 rounded-full bg-purple-100 overflow-hidden">
+        
+        <!-- Ultra thin progress bar -->
+        <div class="w-40 h-[1px] bg-white/10 overflow-hidden relative">
           <div
-            class="h-full bg-gradient-to-r from-purple-600 to-blue-600 transition-[width] duration-200 ease-out"
+            class="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-[width] duration-200 ease-out"
             :style="{ width: progress + '%' }"
           ></div>
+        </div>
+
+        <!-- Elegant percentage -->
+        <div class="font-mono text-[10px] text-gray-500 tracking-widest mt-4">
+          {{ progress }}%
         </div>
       </div>
     </div>

@@ -7,8 +7,8 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
       <!-- Header -->
-      <div class="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20 gap-6">
-        <div v-reveal>
+      <div class="flex flex-col md:flex-row justify-between items-end mb-14 md:mb-16 gap-6">
+        <div v-reveal:left>
           <div class="flex items-center gap-4 mb-5">
             <div class="w-12 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
             <h2 class="text-blue-400 font-semibold tracking-[0.2em] uppercase text-sm">Portfolio</h2>
@@ -17,62 +17,82 @@
             Featured <span class="gradient-text">Works.</span>
           </h3>
         </div>
-        <a href="https://github.com/AnandaHariadi" target="_blank" v-reveal="120" class="px-7 py-3.5 rounded-full bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 hover:border-purple-300/50 hover:shadow-[0_8px_30px_rgba(91,33,182,0.3)] transition-all flex items-center gap-3 group">
+        <a href="https://github.com/AnandaHariadi" target="_blank" v-reveal:right="120" class="px-7 py-3.5 rounded-full bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 hover:border-purple-300/50 hover:shadow-[0_8px_30px_rgba(91,33,182,0.3)] transition-all flex items-center gap-3 group">
           View GitHub
           <svg class="w-5 h-5 text-purple-300 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
         </a>
       </div>
 
-      <!-- Grid of premium cards -->
-      <div class="grid md:grid-cols-2 gap-7">
+      <!-- Project cards grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
         <article
           v-for="(project, index) in projects"
           :key="index"
-          v-reveal="(index % 2) * 120"
-          class="group relative cursor-pointer"
+          v-reveal:zoom="index * 90"
           @click="openDetail(project)"
+          @mousemove="onCardMove"
+          @mouseleave="onCardLeave"
+          class="group relative cursor-pointer rounded-3xl overflow-hidden border border-white/10 bg-[#0a051c]/60 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-white/20"
         >
-          <!-- soft glow behind card on hover -->
-          <div :class="['absolute -inset-1 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-700 bg-gradient-to-tr', project.gradient]"></div>
+          <!-- Gradient glow that follows the cursor -->
+          <div
+            :class="['pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br', project.gradient]"
+            style="mask-image: radial-gradient(220px circle at var(--mx,50%) var(--my,50%), black, transparent); -webkit-mask-image: radial-gradient(220px circle at var(--mx,50%) var(--my,50%), black, transparent);"
+          ></div>
 
-          <div class="relative h-full rounded-[1.75rem] bg-[#0a051c]/80 backdrop-blur-md border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-500 group-hover:-translate-y-2 group-hover:border-purple-500/30">
+          <!-- Inner content (sits above glow) -->
+          <div class="relative h-full flex flex-col rounded-3xl bg-[#0a051c]/80 m-px overflow-hidden">
+            <!-- Image -->
+            <div class="relative overflow-hidden aspect-[16/10]">
+              <img
+                :src="project.image"
+                :alt="project.title"
+                loading="lazy"
+                class="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700 ease-out"
+              />
+              <!-- darkening overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0a051c] via-[#0a051c]/30 to-transparent"></div>
+              <!-- colored wash on hover -->
+              <div :class="['absolute inset-0 opacity-0 group-hover:opacity-25 transition-opacity duration-500 mix-blend-overlay bg-gradient-to-br', project.gradient]"></div>
 
-            <!-- visual header -->
-            <div :class="['relative h-52 overflow-hidden bg-gradient-to-br', project.gradient]">
-              <!-- mesh dots -->
-              <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.4)_1px,_transparent_1px)] [background-size:20px_20px] opacity-20"></div>
-              
-              <!-- Project Image -->
-              <img v-if="project.image" :src="project.image" :alt="project.title" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50 group-hover:opacity-70 group-hover:scale-110 transition-all duration-700" />
-
-              <!-- shine sweep -->
-              <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-              <!-- event chip -->
-              <span v-if="project.event" class="absolute top-5 right-5 px-3 py-1 rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white text-xs font-bold uppercase tracking-wider">
+              <!-- category chip -->
+              <span :class="['absolute top-4 left-4 px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider text-white shadow-lg backdrop-blur-sm bg-gradient-to-r', project.gradient]">
                 {{ project.event }}
               </span>
 
-              <!-- title -->
-              <div class="absolute bottom-5 left-6 right-6">
-                <h4 class="text-3xl md:text-4xl font-black font-outfit text-white drop-shadow-lg tracking-tight">{{ project.title }}</h4>
-              </div>
+              <!-- index number -->
+              <span class="absolute top-4 right-4 font-outfit font-black text-2xl text-white/30 tabular-nums">
+                {{ String(index + 1).padStart(2, '0') }}
+              </span>
             </div>
 
-            <!-- body -->
-            <div class="p-7 flex flex-col h-[calc(100%-13rem)]">
-              <p class="text-gray-300 leading-relaxed font-light mb-5 line-clamp-3">{{ project.description }}</p>
+            <!-- Text -->
+            <div class="relative flex-1 flex flex-col p-5 md:p-6">
+              <h4 class="font-outfit font-bold tracking-tight text-white transition-colors duration-300 text-xl">
+                {{ project.title }}
+              </h4>
+              <p class="mt-2 text-sm text-gray-400 leading-relaxed line-clamp-2">
+                {{ project.description }}
+              </p>
 
-              <div class="flex flex-wrap gap-2 mb-6 mt-auto">
-                <span v-for="tag in project.tags" :key="tag" class="px-3 py-1.5 rounded-lg bg-white/5 text-purple-200 text-xs font-semibold border border-white/5 group-hover:border-purple-500/30 transition-colors">
+              <!-- tags -->
+              <div class="flex flex-wrap gap-2 mt-4">
+                <span
+                  v-for="tag in project.tags"
+                  :key="tag"
+                  class="px-2.5 py-1 rounded-md text-[11px] font-medium text-gray-300 bg-white/5 border border-white/10 group-hover:border-white/20 transition-colors"
+                >
                   {{ tag }}
                 </span>
               </div>
 
-              <div class="inline-flex items-center gap-2 font-semibold w-max group/link">
-                <span class="gradient-text">Explore Project</span>
-                <span class="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white group-hover/link:translate-x-1 transition-transform shadow-[0_0_15px_rgba(109,40,217,0.5)]">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+              <!-- footer / CTA -->
+              <div class="flex items-center justify-between mt-auto pt-5">
+                <span class="text-xs font-semibold uppercase tracking-wider text-gray-500 group-hover:text-purple-300 transition-colors">
+                  View details
+                </span>
+                <span :class="['shrink-0 w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 group-hover:text-white group-hover:border-transparent transition-all duration-300 group-hover:bg-gradient-to-br', project.gradient]">
+                  <svg class="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </span>
               </div>
             </div>
@@ -85,6 +105,17 @@
 
 <script setup>
 import { openDetail } from '../store.js';
+
+// Track cursor position inside a card so the gradient glow can follow it.
+function onCardMove(e) {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+}
+function onCardLeave(e) {
+  e.currentTarget.style.removeProperty('--mx');
+  e.currentTarget.style.removeProperty('--my');
+}
 
 const projects = [
   {
@@ -112,7 +143,7 @@ const projects = [
     tags: ['Real Estate', 'UI/UX', 'Frontend'],
     gradient: 'from-teal-500 to-emerald-400',
     link: 'https://ndaproperty26.vercel.app/',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1512917774080-9bc0b252726f?auto=format&fit=crop&q=80&w=800'
   },
   {
     title: 'Koen Chips',
