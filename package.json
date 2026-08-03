@@ -1,0 +1,11 @@
+{
+  "name": "ananda-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix portfolio-vue run dev",
+    "build": "npm --prefix portfolio-vue run build",
+    "preview": "npm --prefix portfolio-vue run preview"
+  }
+}
