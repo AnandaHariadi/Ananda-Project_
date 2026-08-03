@@ -1,7 +1,20 @@
 {
   "version": 2,
-  "public": true,
   "builds": [
-    { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "portfolio-vue/dist" } }
+    {
+      "src": "portfolio-vue/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/portfolio-vue/dist/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/portfolio-vue/dist/$1"
+    }
   ]
 }
